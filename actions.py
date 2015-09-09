@@ -40,9 +40,13 @@ def build():
     autotools.make()
 
 def install():
-    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
-    #pisitools.dodoc("LICENSE*", "NEWS", "README")
 
     shelltools.cd("../build_python3/%s" % WorkDir)
     autotools.rawInstall("DESTDIR=%s" % get.installDIR())
 
+    shelltools.cd("..")
+    
+    shelltools.cd("../%s" % WorkDir)
+    autotools.rawInstall("DESTDIR=%s" % get.installDIR())
+
+    pisitools.dodoc("LICENSE*", "NEWS", "README")
